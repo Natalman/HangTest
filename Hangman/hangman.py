@@ -118,9 +118,10 @@ def user_input():
     return guess
 
 def Game_on( errors, guessWord, secretWord):
-    errors < 6 and guessWord != secretWord
-    print ("The guess word is")
-    return errors, guessWord, secretWord
+    if errors < 6 and guessWord != secretWord:
+        return True
+    else:
+        return False
 
 def win():
     for letters in secretWord:
