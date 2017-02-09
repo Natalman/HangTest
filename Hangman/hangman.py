@@ -1,5 +1,8 @@
 import random
 def main():
+
+    print('main')
+
     words = []
 
     file1 = read_text()
@@ -10,6 +13,8 @@ def main():
 
     secretWord = random_choice(words)
 
+    print('secret word is ', secretWord)
+
     secretWord = list(secretWord)# converting the chosen word a list
     guessWord = ['', '', '', '', '', '']
     errors = 0
@@ -17,20 +22,21 @@ def main():
 
     while Game_on(errors, guessWord, secretWord):
         guess = user_input()
-        if win():
+        if win(secretWord, guess, guessWord):
             print("correct")
         #Adding 1 to the error when the user guess wrong
         elif  secretWord.count(guess) == 0:
             errors += 1
             hangPic = hangermanGraf(errors)
 
+    # Dealing with winning
     if secretWord == guessWord:
         print("The guess word is", ''.join(guessWord))
         print("This is the correct word.")
+        print('YOU WIN!!')
         winPic = WinGUI()
 
-
-        pass
+    # losing
     elif errors ==6:
         print("You have" , errors , "errors")
         print("you did not make it, the correct word is ", ''.join(secretWord))
@@ -105,9 +111,12 @@ def WinGUI():
 def read_text():
     try:
         file = open("word.txt", "rt")
-        return file
-    except IOError:# handling reading error checking if the files is found
+        lines = file.readlines()
+        file.close()
+        return lines
+    except IOError as e:# handling reading error checking if the files is found
         print("There is no such a  file name found")
+        print(e)
 
 def random_choice(words):
     secretWord = random.choice(words)#choosing a word from the file
@@ -118,11 +127,14 @@ def user_input():
     return guess
 
 def Game_on( errors, guessWord, secretWord):
-    errors < 6 and guessWord != secretWord
-    print ("The guess word is")
-    return errors, guessWord, secretWord
+    if errors < 6 and guessWord != secretWord:
+        print(errors, guessWord, secretWord, 'game on')
+        return True
+    else:
+        print(errors, guessWord, secretWord, 'game over')
+        return False
 
-def win():
+def win(secretWord, guess, guessWord):
     for letters in secretWord:
         if guess == letters:
             index = 0
