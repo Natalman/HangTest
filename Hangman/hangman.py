@@ -15,22 +15,14 @@ def main():
     errors = 0
     hangPic = hangermanGraf(errors)#Calling the graphic function
 
-    try:
-        while errors < 6 and secretWord != guessWord:
-            print ("The guess word is:", guessWord)
-            print( errors, " errors")
-            guess = user_input()
-            if win():
-                print("correct")
-            #Adding 1 to the error when the user guess wrong
-            elif  secretWord.count(guess) == 0:
-                errors += 1
-                hangPic = hangermanGraf(errors)
-
-    except ValueError:#Invalid input error handling
-        print("That was not a valid input, Please try again with string")
-    except Exception:#all exception handling
-        print("There is something wrong with the code")
+    while Game_on(errors, guessWord, secretWord):
+        guess = user_input()
+        if win():
+            print("correct")
+        #Adding 1 to the error when the user guess wrong
+        elif  secretWord.count(guess) == 0:
+            errors += 1
+            hangPic = hangermanGraf(errors)
 
     if secretWord == guessWord:
         print("The guess word is", ''.join(guessWord))
@@ -124,6 +116,11 @@ def random_choice(words):
 def user_input():
     guess = input("Guess a character: ")#Getting user inputs
     return guess
+
+def Game_on( errors, guessWord, secretWord):
+    errors < 6 and guessWord != secretWord
+    print ("The guess word is")
+    return errors, guessWord, secretWord
 
 def win():
     for letters in secretWord:
