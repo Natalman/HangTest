@@ -16,7 +16,8 @@ def main():
     print('secret word is ', secretWord)
 
     secretWord = list(secretWord)# converting the chosen word a list
-    guessWord = ['', '', '', '', '', '']
+    guessWord = [None]*len(secretWord)
+
     errors = 0
     hangPic = hangermanGraf(errors)#Calling the graphic function
 
@@ -128,10 +129,10 @@ def user_input():
 
 def Game_on( errors, guessWord, secretWord):
     if errors < 6 and guessWord != secretWord:
-        print(errors, guessWord, secretWord, 'game on')
+        #print(errors, guessWord, secretWord, 'game on')
         return True
     else:
-        print(errors, guessWord, secretWord, 'game over')
+        #print(errors, guessWord, secretWord, 'game over')
         return False
 
 def win(secretWord, guess, guessWord):

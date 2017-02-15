@@ -39,12 +39,12 @@ class TestGame (unittest.TestCase):
         self.assertTrue(hangman.user_input())
 
 
-    # @patch('Hangman.hangman.random_choice', side_effect=['coffee'])
-    # @patch('builtins.input', side_effect=['c', 'o', 'f', 'e'])
-    # @patch('builtins.print')
-    # def test_main_user_wins(self, mock_print, mock_input, mock_random):
-    #     hangman.main()
-    #     mock_print.assert_any_call('YOU WIN!!')
+    @patch('Hangman.hangman.random_choice', side_effect=['binary'])
+    @patch('builtins.input', side_effect=['b', 'i', 'n', 'a', 'r', 'y'])
+    @patch('builtins.print')
+    def test_main_user_wins(self, mock_print, mock_input, mock_random):
+        hangman.main()
+        mock_print.assert_any_call('YOU WIN!!')
 
 
 
@@ -66,9 +66,9 @@ class TestGame (unittest.TestCase):
 
 
 
-    # @patch('Hangman.hangman.random_choice', return_value='coffee')
-    # @patch('builtins.input', side_effect=['z', 'f', 'd', 'e', 'g', 'q'])
-    # @patch('builtins.print')
-    # def test_main_user_loses(self, mock_print, mock_input, mock_random):
-    #     hangman.main()
-    #     mock_print.assert_any_call('GAME OVER!')
+    @patch('Hangman.hangman.random_choice', return_value='cash')
+    @patch('builtins.input', side_effect=['z', 'f', 'd', 'e', 'g', 'q'])
+    @patch('builtins.print')
+    def test_main_user_loses(self, mock_print, mock_input, mock_random):
+        hangman.main()
+        mock_print.assert_any_call('GAME OVER!')

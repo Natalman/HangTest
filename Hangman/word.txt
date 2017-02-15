@@ -3,3 +3,13 @@ master
 coffee
 binary
 poetry
+color
+piano
+monster
+capture
+anti-virus
+natalman
+killer
+photography
+control
+cash
